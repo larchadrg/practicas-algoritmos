@@ -1,0 +1,12 @@
+package colecciones.pila;
+
+public class OverflowException extends Exception {
+    public OverflowException(){
+        super(); 
+    }
+
+    public OverflowException(String s){
+        super(s); 
+    }
+
+}

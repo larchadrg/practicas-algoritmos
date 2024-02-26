@@ -21,6 +21,8 @@ public class MainCatalogo {
 		Libro libro2 = new Libro("Isaac Asimov", "The Naked Sun", 47);
 		//TODO: agregue más libros
 		Catalogo catalogo = new Catalogo(10);
+		catalogo.agregarLibro(libro1);
+		catalogo.agregarLibro(libro2); 
 		//TODO: pruebe los métodos agregarLibro y buscarPorTitulo
 		System.out.println("Catalogo:\n" + catalogo);
 	} 

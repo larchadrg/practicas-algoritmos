@@ -1,6 +1,8 @@
 package colecciones.cola;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
 * Implementación basada en arreglos de tamaño fijo de la interfaz {@code Cola}.
@@ -14,6 +16,7 @@ public class ColaArregloFijo<T> implements Cola<T> {
 	public static final int CAPACIDAD_POR_DEFECTO = 20;
 	private Object[] arreglo;
 	private int elementos = 0;
+	private int capacidad; 
 
 	/**
 	* Construye una nueva cola vacía con una capacidad máxima de {@value #CAPACIDAD_POR_DEFECTO}.
@@ -31,6 +34,7 @@ public class ColaArregloFijo<T> implements Cola<T> {
 		if (capacidad <= 0)
 			throw new IllegalArgumentException("la capacidad debe ser un numero positivo (" + capacidad + ")");
 		arreglo = new Object[capacidad];
+		this.capacidad = capacidad; 
 	}
 
 	/**
@@ -50,32 +54,44 @@ public class ColaArregloFijo<T> implements Cola<T> {
 
 	@Override
 	public boolean esVacia() {
-		throw new UnsupportedOperationException("Implementar y eliminar esta sentencia");	
+		return elementos == 0; 
 	}
 
 	@Override
 	public int elementos() {
-		throw new UnsupportedOperationException("Implementar y eliminar esta sentencia");
+		return elementos; 
 	}
 
 	@Override
 	public boolean encolar(T elem) {
-		throw new UnsupportedOperationException("Implementar y eliminar esta sentencia");		
+		if (elementos == capacidad) return false; 
+		arreglo[elementos] = elem; 
+		elementos++; 
+		return true; 
+
 	}
 
 	@Override
-	public T desencolar() {
-		throw new UnsupportedOperationException("Implementar y eliminar esta sentencia");
+	public T desencolar() throws IllegalArgumentException{
+		if (esVacia()) throw new IllegalArgumentException(); 
+		@SuppressWarnings("unchecked")
+		T elem = (T) arreglo[0]; 
+		for(int i =1; i<elementos; i++){
+			arreglo[i-1] = arreglo[i];  
+		}
+		elementos--;
+		return elem; 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T primero() {
-		throw new UnsupportedOperationException("Implementar y eliminar esta sentencia");	
+		return (T) arreglo[0]; 
 	}
 
 	@Override
 	public void vaciar() {
-		throw new UnsupportedOperationException("Implementar y eliminar esta sentencia");	
+		elementos = 0; 
 	}
 
 	@Override
@@ -85,7 +101,11 @@ public class ColaArregloFijo<T> implements Cola<T> {
 
 	@Override
 	public String toString() {
-		throw new UnsupportedOperationException("Implementar y eliminar esta sentencia");	
+		String rta = ""; 
+		for(int i=0;i<elementos;i++){
+			rta += arreglo[i] + " "; 
+		}
+		return rta; 
 	}
 
 	@Override
@@ -102,4 +122,33 @@ public class ColaArregloFijo<T> implements Cola<T> {
         	return (T) arreglo[index];
     	}
 
+	private static boolean palindromo(List<Character> secuencia){
+		int midSec = secuencia.size() / 2; 
+		Cola<Character> cola = new ColaArregloFijo<>(); 
+		for(int i = 0; i<midSec;i++){
+			cola.encolar(secuencia.get(i)); 
+		}
+		if (secuencia.size() % 2 == 1) midSec++; 
+		for(int i = secuencia.size()-1; i>=midSec;i--){
+			if (!secuencia.get(i).equals(cola.desencolar())) return false; 
+		} 
+		return true; 
+	}
+
+	public static void main (String args[]){
+		Cola<Integer> cola = new ColaArregloFijo<>(); 
+		cola.encolar(1);
+		cola.encolar(2); 
+		cola.encolar(3);
+		Integer desencolado = cola.desencolar(); 
+		System.out.println(desencolado);
+		System.out.println(cola);
+
+		List<Character> secuencia = new ArrayList<>();
+        String sec = "caabaacc"; 
+        for (char c : sec.toCharArray()) {
+            secuencia.add(c);
+        }
+        System.out.println(palindromo(secuencia));
+	}
 }

@@ -37,7 +37,7 @@ public interface Cola<T> {
 	* @throws IllegalStateException si la cola está vacía
 	* @see #esVacia()
 	*/
-	public T desencolar();
+	public T desencolar() throws IllegalStateException;
 
 	/**
 	* Retorna el primero de la cola, si ésta no es vacía.
@@ -45,7 +45,7 @@ public interface Cola<T> {
 	* @throws IllegalStateException si la cola está vacía
 	* @see #esVacia()
 	*/
-	public T primero();
+	public T primero() throws IllegalStateException;
 
 	/**
 	* Remueve todos los elementos en la cola.
