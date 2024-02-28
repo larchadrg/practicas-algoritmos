@@ -16,6 +16,21 @@ public class Main {
       ArraySorter.bubbleSort(arreglo);
       System.out.println("Arreglo ordenado con BubbleSort:\n" + Arrays.toString(arreglo));
 
+      arreglo = ArrayGenerator.generarArregloDeLongitud(0, 100, 10);
+      System.out.println("Arreglo random, tamaño 10 y valores entre 0 y 100:\n" + Arrays.toString(arreglo));
+      ArraySorter.mergeSort(arreglo);
+      System.out.println("Arreglo ordenado con MergeSort:\n" + Arrays.toString(arreglo));
+
+      arreglo = ArrayGenerator.generarArregloDeLongitud(0, 100, 10);
+      System.out.println("Arreglo random, tamaño 10 y valores entre 0 y 100:\n" + Arrays.toString(arreglo));
+      ArraySorter.quickSort(arreglo);
+      System.out.println("Arreglo ordenado con Quicksort:\n" + Arrays.toString(arreglo));
+
+      arreglo = ArrayGenerator.generarArregloDeLongitud(0, 100, 10);
+      System.out.println("Arreglo random, tamaño 10 y valores entre 0 y 100:\n" + Arrays.toString(arreglo));
+      ArraySorter.shellSort(arreglo);
+      System.out.println("Arreglo ordenado con Shellsort:\n" + Arrays.toString(arreglo));
+
       arreglo = ArrayGenerator.generarArregloDeLongitud(0, 100, 30);
       System.out.println("Arreglo random, tamaño 30 y valores entre 0 y 100:\n" + Arrays.toString(arreglo));
       ArraySorter.selectionSort(arreglo);
